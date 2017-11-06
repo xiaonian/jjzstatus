@@ -5,15 +5,13 @@ from weixin import gettoken, senddata
 
 
 def get_status():
-    url = "https://api.jinjingzheng.zhongchebaolian.com/errorpage/enterbj.html"
-    r = requests.get(url)
-    r.encoding = "utf-8"
-    # print r.text
-    if u"由于办理电子进京证申请排队人数过多" in r.text:
-        # print "当前不可用"
+    url = 'https://enterbj.zhongchebaolian.com/enterbj/platform/enterbj/curtime_03'
+    requests.packages.urllib3.disable_warnings()
+    r = requests.get(url, verify=False, allow_redirects=False)
+    location = r.headers.get("Location", None)
+    if location == 'https://enterbj.zhongchebaolian.com/errorpage/enterbj.html':
         status = 0
     else:
-        # print "进京证可以正常办理了"
         status = 1
     return status
 
