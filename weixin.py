@@ -54,6 +54,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     corpid = '企业CorpID'
     corpsecret = '应用Secret'
-	agentid = "应用AgentID"
+    agentid = "应用AgentID"
     accesstoken = gettoken(corpid, corpsecret)
     senddata(accesstoken, args.content, args.party, args.user, agentid)
