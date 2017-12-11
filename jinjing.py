@@ -26,11 +26,11 @@ if __name__ == "__main__":
 	    status = get_status()
 	    if status != laststatus:
 	        # 状态发生改变时告警
-	        laststatus = status
 	        message = "进京证办理通道开启" if status == 1 else "进京证办理通道关闭"
 			#以下是企业微信告警推送
 	        accesstoken = gettoken(corpid, corpsecret)
 	        senddata(accesstoken, message, 4, None, agentid)
+		laststatus = status
 	except Exception,e:
             print Exception,e
         sleep(60)
