@@ -11,7 +11,7 @@ def get_status():
     location = r.headers.get("Location", None)
     if location == 'https://enterbj.zhongchebaolian.com/errorpage/enterbj.html':
         status = 0
-    elif location == '':
+    elif location == 'https://enterbj.zhongchebaolian.com/errorpage/powermaintenance.html':
 	status = 2
     else:
         status = 1
