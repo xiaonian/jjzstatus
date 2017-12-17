@@ -11,6 +11,8 @@ def get_status():
     location = r.headers.get("Location", None)
     if location == 'https://enterbj.zhongchebaolian.com/errorpage/enterbj.html':
         status = 0
+    elif location == '':
+	status = 2
     else:
         status = 1
     return status
@@ -26,7 +28,12 @@ if __name__ == "__main__":
 	    status = get_status()
 	    if status != laststatus:
 	        # 状态发生改变时告警
-	        message = "进京证办理通道开启" if status == 1 else "进京证办理通道关闭"
+		if status == 0:
+		    message = "进京证办理通道关闭"
+	        elif status == 2:
+		    message = "机房设备断电维护中"
+	        else:
+	            message = "进京证办理通道开启"
 			#以下是企业微信告警推送
 	        accesstoken = gettoken(corpid, corpsecret)
 	        senddata(accesstoken, message, 4, None, agentid)
