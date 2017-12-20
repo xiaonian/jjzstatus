@@ -13,6 +13,8 @@ def get_status():
         status = 0
     elif location == 'https://enterbj.zhongchebaolian.com/errorpage/powermaintenance.html':
 	status = 2
+    elif 'errorpage' in location:
+	status = 3
     else:
         status = 1
     return status
@@ -28,7 +30,7 @@ if __name__ == "__main__":
 	    status = get_status()
 	    if status != laststatus:
 	        # 状态发生改变时告警
-		if status == 0:
+		if status == 0 or status == 3:
 		    message = "进京证办理通道关闭"
 	        elif status == 2:
 		    message = "机房设备断电维护中"
